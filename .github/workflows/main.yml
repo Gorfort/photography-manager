@@ -2,9 +2,9 @@ name: Backend Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -22,18 +22,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
-        run: |
-          cd backend
-          npm install
+        working-directory: photography-manager/backend
+        run: npm install
 
       - name: Run tests
+        working-directory: photography-manager/backend
         env:
           MONGODB_URI: mongodb://localhost:27017/photography-manager-test
           JWT_SECRET: test_secret_key
           PORT: 5001
-        run: |
-          cd backend
-          npm test
+        run: npm test
