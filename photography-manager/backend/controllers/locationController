@@ -1,0 +1,33 @@
+const Location = require("../models/Location");
+
+const getAll = async (req, res) => {
+  try {
+    const locations = await Location.find();
+    res.json(locations);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const create = async (req, res) => {
+  try {
+    const { city, country, lat, lng } = req.body;
+    const location = await Location.create({ city, country, lat, lng });
+    res.status(201).json(location);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const remove = async (req, res) => {
+  try {
+    const location = await Location.findByIdAndDelete(req.params.id);
+    if (!location)
+      return res.status(404).json({ message: "Location not found" });
+    res.json({ message: "Location deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getAll, create, remove };

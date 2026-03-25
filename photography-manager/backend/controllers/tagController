@@ -1,0 +1,31 @@
+const Tag = require('../models/Tag')
+
+const getAll = async (req, res) => {
+  try {
+    const tags = await Tag.find()
+    res.json(tags)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+const create = async (req, res) => {
+  try {
+    const tag = await Tag.create({ name: req.body.name })
+    res.status(201).json(tag)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+const remove = async (req, res) => {
+  try {
+    const tag = await Tag.findByIdAndDelete(req.params.id)
+    if (!tag) return res.status(404).json({ message: 'Tag not found' })
+    res.json({ message: 'Tag deleted successfully' })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports = { getAll, create, remove }
