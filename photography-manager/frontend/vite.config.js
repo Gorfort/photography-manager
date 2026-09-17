@@ -4,4 +4,6 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // Served from https://<user>.github.io/photography-manager/ on GitHub Pages
+  base: "/photography-manager/",
 });

@@ -1,4 +1,4 @@
-const API = "http://localhost:5001/api";
+import { API_URL as API } from "../config";
 
 export const getPhotos = async (filters = {}) => {
   const params = new URLSearchParams(filters);

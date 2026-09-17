@@ -5,6 +5,7 @@ import { getTags } from "../services/tagService";
 import { getLocations } from "../services/locationService";
 import { useAuth } from "../context/AuthContext";
 import exifr from "exifr";
+import { API_BASE_URL } from "../config";
 import styles from "./PhotoDetail.module.css";
 
 function PhotoDetail() {
@@ -56,7 +57,7 @@ function PhotoDetail() {
     setExif(null);
     setEditing(false);
     exifr
-      .parse(`http://localhost:5001${photo.url}`, {
+      .parse(`${API_BASE_URL}${photo.url}`, {
         pick: [
           "Make",
           "Model",
@@ -174,7 +175,7 @@ function PhotoDetail() {
         </button>
         <div className={styles.photoWrapper}>
           <img
-            src={`http://localhost:5001${photo.url}`}
+            src={`${API_BASE_URL}${photo.url}`}
             alt={photo.title}
             className={styles.image}
           />

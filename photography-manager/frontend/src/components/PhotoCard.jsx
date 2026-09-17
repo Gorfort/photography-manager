@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 import styles from "./PhotoCard.module.css";
 
 function PhotoCard({ photo, allPhotos }) {
@@ -11,7 +12,7 @@ function PhotoCard({ photo, allPhotos }) {
   return (
     <div className={styles.card} onClick={handleClick}>
       <img
-        src={`http://localhost:5001${photo.url}`}
+        src={`${API_BASE_URL}${photo.url}`}
         alt={photo.title}
         className={styles.image}
       />
